@@ -72,7 +72,20 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eutoUsd = 1.1;
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * eutoUsd;
+// });
 
+const movementsUSD = movements.map(mov => mov * eutoUsd);
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsToUSDfor = [];
+for (const mov of movements) {
+  movementsToUSDfor.push(mov * eutoUsd);
+}
+console.log(movementsToUSDfor);
 /////////////////////////////////////////////////
 
 const displayMovements = function (movements) {
@@ -95,3 +108,37 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+// const createUsernames = function (account) {
+
+//   account.forEach(function (acc) {
+//     acc.username = acc.owner
+//       .toLowerCase()
+//       .split(' ')
+//       .map(name => name[0])
+//       .join('');
+//   });
+// };
+
+// createUsernames(accounts);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
+console.log(accounts)
+
+// Create new username
+
+// const username = user
+//   .toLowerCase()
+//   .split(' ')
+//   .map(name => name[0])
+//   .join('');
