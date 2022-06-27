@@ -107,7 +107,7 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 // const createUsernames = function (account) {
 
@@ -150,22 +150,22 @@ const calDisplayBalance = function (movement) {
   labelBalance.textContent = `${balance} EUR`;
 };
 
-calDisplayBalance(movements);
+// calDisplayBalance(movements);
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
       // console.log(arr);
       return int >= 1;
@@ -174,7 +174,44 @@ const calcDisplaySummary = function (movements) {
   labelSumInterest.textContent = `${interest}€`;
 };
 
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1.movements);
+
+// Event handler
+
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  // prevent form from submitting
+  e.preventDefault();
+
+  currentAccount = accounts.find(acc => {
+    return acc.username === inputLoginUsername.value;
+  });
+
+  // console.log(currentAccount)
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI and message
+    labelWelcome.textContent = `Welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+
+    containerApp.style.opacity = 100;
+
+    // inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginUsername.value = '';
+    inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    //Display Movements
+    displayMovements(currentAccount.movements);
+    // Display Balance
+    calDisplayBalance(currentAccount.movements);
+    // Display Summary
+    calcDisplaySummary(currentAccount);
+  }
+});
+
 // Filter
 
 // const deposits = movements.filter(function (mov) {
@@ -194,3 +231,11 @@ calcDisplaySummary(account1.movements);
 // }, 0);
 
 // console.log(balance);
+
+// Find Method
+
+// const account = accounts.find(acc => acc.owner === 'Steven Thomas Williams');
+
+// console.log(accounts)
+
+// console.log(account)
