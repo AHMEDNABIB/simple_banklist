@@ -78,14 +78,14 @@ const eutoUsd = 1.1;
 // });
 
 const movementsUSD = movements.map(mov => mov * eutoUsd);
-console.log(movements);
-console.log(movementsUSD);
+// console.log(movements);
+// console.log(movementsUSD);
 
 const movementsToUSDfor = [];
 for (const mov of movements) {
   movementsToUSDfor.push(mov * eutoUsd);
 }
-console.log(movementsToUSDfor);
+//console.log(movementsToUSDfor);
 /////////////////////////////////////////////////
 
 const displayMovements = function (movements) {
@@ -133,7 +133,7 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-console.log(accounts)
+// console.log(accounts);
 
 // Create new username
 
@@ -142,3 +142,33 @@ console.log(accounts)
 //   .split(' ')
 //   .map(name => name[0])
 //   .join('');
+
+const calDisplayBalance = function (movement) {
+  const balance = movement.reduce(function (acc, mov, i) {
+  
+    return acc + mov;
+  }, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calDisplayBalance(movements);
+
+// Filter
+
+// const deposits = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+// console.log(deposits);
+
+// const withdrawls = movements.filter(mov => mov < 0);
+
+// console.log(withdrawls);
+
+// accumulator
+
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`)
+//   return acc + cur;
+// }, 0);
+
+// console.log(balance);
