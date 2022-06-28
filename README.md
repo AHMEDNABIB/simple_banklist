@@ -13,4 +13,5 @@ usernmae= ss, pin= 4444
 2. current balance
 3. can send or ask money from anothe account
 4. close current account 
-5.show the summary of transaction and sort the movements
+
+5. show the summary of transaction and sort the movements
